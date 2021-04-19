@@ -7,6 +7,8 @@ class Transaction
 		@qty = qty
 		@price = price
 		@type = type
+		raise "qty cannot be negative! #{qty}" if qty < 0
+		raise "price cannot be negative! #{price}" if price < 0
 	end
 
 	def value
@@ -22,6 +24,7 @@ class Transaction
 			buy: Transaction.new(date, key, qty - to_sell, price, :buy),
 			sell: Transaction.new(sell.date, sell.key, sell.qty - to_sell, sell.price, :sell),
 			qty: to_sell,
+			sell_value: to_sell*sell.price,
 			result: to_sell*(sell.price - price)
 		}
 	end

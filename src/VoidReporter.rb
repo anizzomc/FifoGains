@@ -3,7 +3,7 @@
 class VoidReporter
 
 	def report (entry)
-		# Do nothing
+		puts entry
 	end
 
 end

@@ -22,8 +22,6 @@ describe Transaction do
   it "sell? returns true if transaction is sell" do
   	expect(Transaction.new("20200411", "BOND", 1, 1.3, :sell).sell?).to be true
   end
-  
-
  
   it "sells less than it bought before" do
     sell = Transaction.new("20200411", "BOND", 1, 1.3, :sell)
@@ -111,7 +109,16 @@ describe Transaction do
 		} .to raise_error (RuntimeError)
 	end
 
+  it "fails when quantity is negative" do
+    expect {
+      Transaction.new("20200411", "BOND", -1, 1.3, :buy)
+    } .to raise_error (RuntimeError)
+  end
 
-
+  it "fails when prive is negative" do
+    expect {
+      Transaction.new("20200411", "BOND", 1, -1.3, :buy)
+    } .to raise_error (RuntimeError)
+  end
 
 end
